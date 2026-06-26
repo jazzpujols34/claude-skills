@@ -1,0 +1,6 @@
+{
+  "tags": ["deploy", "ci-cd", "cloudflare", "cloud-run", "vercel", "pre-deploy"],
+  "maturity": "stable",
+  "version": "1.0.0",
+  "requires": ["bash", "git", "grep"]
+}

@@ -1,0 +1,6 @@
+{
+  "tags": ["security", "secrets", "audit", "pre-deploy", "owasp", "dependencies"],
+  "maturity": "stable",
+  "version": "1.0.0",
+  "requires": ["bash", "git"]
+}

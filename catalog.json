@@ -1,6 +1,48 @@
 {
-  "count": 1,
+  "count": 4,
   "skills": [
+    {
+      "name": "debug-loop-breaker",
+      "description": "Use when debugging has gone in circles — same error 2+ times, repeated failed fixes. Auto-trigger on \"still not working\", \"same error\", \"try again\" appearing twice in a session. Stops guessing, forces systematic diagnosis.",
+      "tags": [
+        "debugging",
+        "workflow",
+        "process"
+      ],
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/debug-loop-breaker"
+    },
+    {
+      "name": "deploy-checklist",
+      "description": "Use before deploying any project to production. Auto-detects platform (Cloudflare Pages, Cloud Run, Vercel) and runs platform-specific checks. Trigger on \"deploy\", \"deploy checklist\", \"push to prod\".",
+      "tags": [
+        "deploy",
+        "ci-cd",
+        "cloudflare",
+        "cloud-run",
+        "vercel",
+        "pre-deploy"
+      ],
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/deploy-checklist"
+    },
+    {
+      "name": "security-scanner",
+      "description": "Use before any production deploy or when asked to audit security. Scans for hardcoded secrets, .env exposure, git history leaks, dependency vulnerabilities, and OWASP issues. Trigger on \"security scan\", \"check for secrets\", \"audit security\".",
+      "tags": [
+        "security",
+        "secrets",
+        "audit",
+        "pre-deploy",
+        "owasp",
+        "dependencies"
+      ],
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/security-scanner"
+    },
     {
       "name": "svg-diagram",
       "description": "Draw SVG diagrams inside HTML pages — flowcharts, decision trees, layer diagrams, architecture flows, tier matrices. Use this skill whenever the user asks for a diagram, visual flow, architecture drawing, or any SVG-based visual inside an HTML document. Also use when building single-file HTML reference pages that need section diagrams. Triggers on phrases like \"draw a diagram\", \"add a flow chart\", \"visualize the architecture\", \"decision tree\", \"show the layers\", or when building HTML pages with embedded SVG visuals. Do NOT use for standalone image generation or React/canvas-based visualizations.",

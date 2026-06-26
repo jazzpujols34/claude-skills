@@ -11,5 +11,11 @@ in their `meta.json`; this log tracks the repo.
   `AGENTS.md` + `llms.txt` for agents, generated `catalog.json`.
 - Tooling: `tools/check-skill.sh` (secret + personalization publish gate),
   `tools/new-skill.sh` (scaffold), `tools/build-catalog.py` (generated index).
-- **svg-diagram** — first skill: precise, light/dark-safe SVG diagrams inside HTML,
-  with layout math that prevents text collisions and viewBox bugs.
+- **svg-diagram** — precise, light/dark-safe SVG diagrams inside HTML, with layout
+  math that prevents text collisions and viewBox bugs.
+- **debug-loop-breaker** — breaks the "same error 2+ times" debugging spiral with a
+  systematic diagnosis protocol instead of more guessing.
+- **security-scanner** — pre-deploy scan for hardcoded secrets, exposed `.env`, git
+  history leaks, dependency vulns, and OWASP issues (ships 3 standalone scripts).
+- **deploy-checklist** — auto-detects the platform (Cloudflare Pages / Cloud Run /
+  Vercel) and runs platform-specific pre-deploy checks (ships 4 standalone scripts).
