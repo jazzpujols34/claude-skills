@@ -19,3 +19,9 @@ in their `meta.json`; this log tracks the repo.
   history leaks, dependency vulns, and OWASP issues (ships 3 standalone scripts).
 - **deploy-checklist** — auto-detects the platform (Cloudflare Pages / Cloud Run /
   Vercel) and runs platform-specific pre-deploy checks (ships 4 standalone scripts).
+- **tdd-guard** — enforces test-first development; pairs with debug-loop-breaker
+  (prevention vs. cure).
+- **growth-playbook** — the after-you-ship skill: positioning, landing-page audit,
+  CRO, distribution, email sequences, churn prevention.
+- **seo-audit** — technical SEO + content audit + schema markup + GEO (optimizing
+  for AI search).

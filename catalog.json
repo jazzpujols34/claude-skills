@@ -1,5 +1,5 @@
 {
-  "count": 4,
+  "count": 7,
   "skills": [
     {
       "name": "debug-loop-breaker",
@@ -29,6 +29,21 @@
       "path": "skills/deploy-checklist"
     },
     {
+      "name": "growth-playbook",
+      "description": "Post-launch marketing and growth. Trigger on \"get customers\", \"how to sell\", \"landing page copy\", \"conversion\", \"CRO\", \"growth\", \"marketing\", \"email sequence\", \"distribution\", \"get users\", or when a shipped product has zero customers. This is the skill for AFTER you ship.",
+      "tags": [
+        "growth",
+        "marketing",
+        "cro",
+        "distribution",
+        "post-launch",
+        "email"
+      ],
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/growth-playbook"
+    },
+    {
       "name": "security-scanner",
       "description": "Use before any production deploy or when asked to audit security. Scans for hardcoded secrets, .env exposure, git history leaks, dependency vulnerabilities, and OWASP issues. Trigger on \"security scan\", \"check for secrets\", \"audit security\".",
       "tags": [
@@ -44,6 +59,21 @@
       "path": "skills/security-scanner"
     },
     {
+      "name": "seo-audit",
+      "description": "SEO audit and optimization for web projects. Trigger on \"SEO\", \"search ranking\", \"audit my site\", \"schema markup\", \"meta tags\", \"sitemap\", \"search console\", \"organic traffic\", or when optimizing a site for search engines. Works for any web project.",
+      "tags": [
+        "seo",
+        "schema",
+        "meta-tags",
+        "geo",
+        "web",
+        "content"
+      ],
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/seo-audit"
+    },
+    {
       "name": "svg-diagram",
       "description": "Draw SVG diagrams inside HTML pages — flowcharts, decision trees, layer diagrams, architecture flows, tier matrices. Use this skill whenever the user asks for a diagram, visual flow, architecture drawing, or any SVG-based visual inside an HTML document. Also use when building single-file HTML reference pages that need section diagrams. Triggers on phrases like \"draw a diagram\", \"add a flow chart\", \"visualize the architecture\", \"decision tree\", \"show the layers\", or when building HTML pages with embedded SVG visuals. Do NOT use for standalone image generation or React/canvas-based visualizations.",
       "tags": [
@@ -56,6 +86,19 @@
       "maturity": "stable",
       "version": "1.0.0",
       "path": "skills/svg-diagram"
+    },
+    {
+      "name": "tdd-guard",
+      "description": "Enforce test-first development. Trigger on \"write a feature\", \"add functionality\", \"implement\", or any code task that touches business logic. Auto-activate when writing code without tests. Pairs with debug-loop-breaker (prevention vs cure).",
+      "tags": [
+        "testing",
+        "tdd",
+        "workflow",
+        "quality"
+      ],
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/tdd-guard"
     }
   ]
 }

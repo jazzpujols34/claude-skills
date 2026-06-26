@@ -21,8 +21,11 @@ That's the whole install. Then just describe the task in your own words — each
 |---|---|---|---|
 | [`debug-loop-breaker`](skills/debug-loop-breaker) | Use when debugging has gone in circles — same error 2+ times, repeated failed fixes. | `debugging`, `workflow`, `process` | stable |
 | [`deploy-checklist`](skills/deploy-checklist) | Use before deploying any project to production. | `deploy`, `ci-cd`, `cloudflare`, `cloud-run`, `vercel`, `pre-deploy` | stable |
+| [`growth-playbook`](skills/growth-playbook) | Post-launch marketing and growth. | `growth`, `marketing`, `cro`, `distribution`, `post-launch`, `email` | stable |
 | [`security-scanner`](skills/security-scanner) | Use before any production deploy or when asked to audit security. | `security`, `secrets`, `audit`, `pre-deploy`, `owasp`, `dependencies` | stable |
+| [`seo-audit`](skills/seo-audit) | SEO audit and optimization for web projects. | `seo`, `schema`, `meta-tags`, `geo`, `web`, `content` | stable |
 | [`svg-diagram`](skills/svg-diagram) | Draw SVG diagrams inside HTML pages — flowcharts, decision trees, layer diagrams, architecture flows, tier matrices. | `html`, `svg`, `diagrams`, `data-viz`, `dark-mode` | stable |
+| [`tdd-guard`](skills/tdd-guard) | Enforce test-first development. | `testing`, `tdd`, `workflow`, `quality` | stable |
 <!-- CATALOG:END -->
 
 Maturity: `experimental` (new, may change) · `beta` (works, rough edges) · `stable` (battle-tested).
