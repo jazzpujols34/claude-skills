@@ -1,0 +1,27 @@
+# secrets — never commit keys
+.env
+*.env
+!.env.example
+*.key
+*.pem
+id_rsa*
+*.p12
+*-credentials.json
+service-account*.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# python
+__pycache__/
+*.py[cod]
+
+# headless-browser scratch
+.gstack/
+
+# generated illustration / build output (skills bring their own)
+*-assets/images/tmp/

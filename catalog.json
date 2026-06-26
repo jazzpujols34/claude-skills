@@ -1,0 +1,19 @@
+{
+  "count": 1,
+  "skills": [
+    {
+      "name": "svg-diagram",
+      "description": "Draw SVG diagrams inside HTML pages — flowcharts, decision trees, layer diagrams, architecture flows, tier matrices. Use this skill whenever the user asks for a diagram, visual flow, architecture drawing, or any SVG-based visual inside an HTML document. Also use when building single-file HTML reference pages that need section diagrams. Triggers on phrases like \"draw a diagram\", \"add a flow chart\", \"visualize the architecture\", \"decision tree\", \"show the layers\", or when building HTML pages with embedded SVG visuals. Do NOT use for standalone image generation or React/canvas-based visualizations.",
+      "tags": [
+        "html",
+        "svg",
+        "diagrams",
+        "data-viz",
+        "dark-mode"
+      ],
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/svg-diagram"
+    }
+  ]
+}

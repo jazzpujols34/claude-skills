@@ -1,0 +1,46 @@
+# Personalization deny-list for check-skill.sh
+# One case-insensitive regex per line. Lines starting with # are comments.
+# A skill must contain NONE of these before it can be published — they point
+# readers at people, machines, or private projects they don't have access to.
+#
+# Extend this list as new private names appear. Keep it generic enough that it
+# never lives inside a published skill.
+
+# --- author / identity ---
+jazz[ ._-]?lien
+jazzpujols
+連冠傑
+ro5112
+aipujols
+glimmer\.hello
+
+# --- private domains / sites ---
+jazzlien\.com
+podsight\.tw
+glimmer\.video
+
+# --- private projects / orgs ---
+jazz-gallery
+kotori
+cloudmile
+mile\.cloud
+ptv-automation
+knowledge-management
+portfolio-manager
+17_ultimate
+ultimate_claude
+
+# --- machine-local / monorepo paths ---
+/Users/[a-z]
+/home/[a-z]
+Desktop/jazz
+0_GitHub
+\.claude/knowledge
+\.claude/skills/[a-z]
+
+# --- author-coupled framing that confuses external readers ---
+Jazz-approved
+Jazz rejected
+flagged .* by Jazz
+the KM React app
+KM system

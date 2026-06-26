@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagram style — hand-drawn concept hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,600;0,700&family=Noto+Sans+TC:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:#07070b;color:#E8EDF0;line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding:30px 26px 80px}
+h1{font-size:22px;font-weight:900;letter-spacing:-.01em;margin-bottom:6px}
+.sub{color:#9aa3ab;font-size:14px;max-width:780px;margin-bottom:22px}
+.panel{background:#101016;border:1px solid #23242c;border-radius:18px;padding:8px;margin-bottom:24px;overflow:hidden}
+.cap{display:flex;align-items:center;gap:10px;padding:14px 16px 4px}
+.cap h2{font-size:14px;font-weight:800;letter-spacing:.02em;font-family:'JetBrains Mono',monospace}
+.cap .tag{font-size:10px;font-weight:700;padding:2px 9px;border-radius:999px;background:#76B900;color:#0a0a0a}
+.note{font-size:12.5px;color:#9aa3ab;padding:0 16px 14px;line-height:1.7}
+.note b{color:#E8EDF0}
+svg{width:100%;height:auto;display:block;border-radius:12px}
+.legend{display:flex;gap:8px 16px;flex-wrap:wrap;font-size:12px;color:#9aa3ab;margin:0 0 18px;padding:12px 14px;background:#101016;border:1px solid #23242c;border-radius:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:13px;border-radius:5px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Hand-drawn concept hero (Track B)</h1>
+  <p class="sub">The three things that make a hand-drawn hero look designed: ① a hand-lettered font (Shantell Sans — handwriting only renders for Latin labels) ② the hub has an inner routed loop, not an empty box ③ the strokes get a soft glow over a dark vignette. Labels are English so the handwriting reads — which is also the limit: <b>this full look only works for English / conceptual diagrams; CJK labels fall back to a clean font (use Track A for those).</b></p>
+
+  <div class="legend">
+    <span><i style="background:#76B900"></i>LLM / HBM</span>
+    <span><i style="background:#0D9488"></i>DRAM</span>
+    <span><i style="background:#DC2626"></i>SSD·NAND</span>
+    <span><i style="background:#2F7DEB"></i>CPU</span>
+    <span><i style="background:#E0900F"></i>DPU</span>
+    <span><i style="background:#76B900"></i>TOKENS</span>
+  </div>
+
+  <div class="panel">
+    <div class="cap"><span class="tag">Track B</span><h2>Hand-lettered + inner loop + soft glow + vignette</h2></div>
+    <svg id="svg" viewBox="0 0 940 580" role="img" aria-label="Hand-drawn concept diagram of an LLM inference memory footprint: a central hub with an attend-generate-append loop, flanked by satellite nodes each tagged with resource pills"></svg>
+    <p class="note"><b>What lifts it further:</b> connect nodes with rounded elbow (right-angle) lines instead of diagonals, give the pills a subtle inner shadow, and add more whitespace overall. The level orthogonal connectors are the detail most often gotten wrong — see the recipe in <code>concept-hero-style.md</code>.</p>
+  </div>
+</div>
+
+<script src="https://unpkg.com/roughjs@4.6.6/bundled/rough.js"></script>
+<script>
+const HAND="'Shantell Sans', 'Noto Sans TC', sans-serif";
+const STROKE="#D6DEE4", TEXT="#EAF0F3", SUB="#aab2b9";
+const PILL={LLM:'#76B900',HBM:'#76B900',TOKENS:'#76B900',DRAM:'#0D9488',SSD:'#DC2626',NAND:'#DC2626',CPU:'#2F7DEB',DPU:'#E0900F',KV:'#0D9488'};
+const NS='http://www.w3.org/2000/svg';
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,o={}){const t=el('text',{x,y,'text-anchor':o.anchor||'middle','font-size':o.size||16,'font-family':o.font||HAND,'font-weight':o.w||600,fill:o.fill||TEXT,'letter-spacing':o.ls||'.04em'});t.textContent=s;return t;}
+function arrowHead(x,y,ang,c){const L=10,W=5;const bx=x-L*Math.cos(ang),by=y-L*Math.sin(ang);return el('path',{d:`M${x},${y} L${(bx-W*Math.sin(ang)).toFixed(1)},${(by+W*Math.cos(ang)).toFixed(1)} L${(bx+W*Math.sin(ang)).toFixed(1)},${(by-W*Math.cos(ang)).toFixed(1)} Z`,fill:c});}
+function pills(cx,top,arr){const g=el('g',{}),pw=52,ph=21,gap=8;let x=cx-(arr.length*pw+(arr.length-1)*gap)/2;arr.forEach(p=>{g.appendChild(el('rect',{x,y:top,width:pw,height:ph,rx:7,fill:PILL[p]}));const t=txt(x+pw/2,top+ph/2+4,p,{size:11,w:700,fill:'#0c0c0c',ls:'.02em'});g.appendChild(t);x+=pw+gap;});return g;}
+
+const svg=document.getElementById('svg');
+// defs: glow + vignette
+const defs=el('defs',{});
+defs.innerHTML=`
+ <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <radialGradient id="vig" cx="50%" cy="40%" r="75%"><stop offset="0%" stop-color="#13131b"/><stop offset="100%" stop-color="#07070b"/></radialGradient>`;
+svg.appendChild(defs);
+svg.appendChild(el('rect',{x:0,y:0,width:940,height:580,fill:'url(#vig)'}));
+
+const rc=rough.svg(svg);
+const rOpt={stroke:STROKE,roughness:0.9,bowing:0.9,strokeWidth:1.7};
+const glow=el('g',{filter:'url(#glow)'});svg.appendChild(glow);
+
+// title
+svg.appendChild(txt(470,52,'LLM INFERENCE = MODEL + MEMORY',{size:24,w:700,fill:'#CFE6A0',ls:'.06em'}));
+
+// ---- HUB with inner routed loop ----
+const hub={x:355,y:210,w:230,h:178};
+glow.appendChild(rc.rectangle(hub.x,hub.y,hub.w,hub.h,{...rOpt,strokeWidth:2.2}));
+// inner stages: three rows (label left-anchored, pill on the right), evenly spaced
+const stages=[{l:'ATTEND',p:'KV',y:258},{l:'GENERATE',p:'LLM',y:308},{l:'APPEND KV',p:'KV',y:358}];
+stages.forEach(s=>{
+  svg.appendChild(txt(412,s.y+5,s.l,{anchor:'start',size:14,w:600}));
+  svg.appendChild(pills(548,s.y-10,[s.p]));
+});
+// clean loop-back bracket in the LEFT margin: leaves APPEND (bottom), rounds up, returns into ATTEND (top).
+// stays at x 380..404 — clear of the pills (x>=522) and the outer box edge (x=355).
+const lb=el('path',{d:'M404,358 L388,358 Q380,358 380,350 L380,266 Q380,258 388,258 L404,258',
+  fill:'none',stroke:STROKE,'stroke-width':1.6,'stroke-linecap':'round','stroke-linejoin':'round'});
+glow.appendChild(lb);
+svg.appendChild(arrowHead(404,258,0,STROKE));        // returns INTO ATTEND, pointing right
+svg.appendChild(el('circle',{cx:404,cy:358,r:2.6,fill:STROKE}));  // tap point leaving APPEND
+svg.appendChild(txt(392,242,'loop',{size:11,fill:SUB,w:400,ls:'.1em'}));
+
+// ---- satellites (flank hub at fixed entry heights → straight orthogonal arrows) ----
+// hub spans y 210..388; entry heights chosen inside that range so connectors stay level.
+const HY_HI=252, HY_LO=346;
+const sat=[
+ {x:66,y:HY_HI-31,w:178,h:62,l:'PROMPT',p:['TOKENS'],side:'r',hy:HY_HI},
+ {x:66,y:HY_LO-31,w:178,h:62,l:'KV CACHE',p:['HBM','DRAM','SSD'],side:'r',hy:HY_LO},
+ {x:696,y:HY_HI-31,w:178,h:62,l:'AGENT TOOLS',p:['CPU','DRAM'],side:'l',hy:HY_HI},
+ {x:696,y:HY_LO-31,w:178,h:62,l:'OFFLOAD',p:['SSD','DPU'],side:'l',hy:HY_LO},
+ {x:381,y:474,w:178,h:62,l:'MEMORY TIERS',p:['HBM','DRAM','NAND'],side:'t'},
+];
+const lineOpt={stroke:STROKE,roughness:0.6,bowing:0.25,strokeWidth:1.6};
+sat.forEach(n=>{
+  glow.appendChild(rc.rectangle(n.x,n.y,n.w,n.h,rOpt));
+  svg.appendChild(txt(n.x+n.w/2,n.y+n.h/2+5,n.l,{size:15,w:600}));
+  svg.appendChild(pills(n.x+n.w/2,n.y+n.h+9,n.p));
+  let from,to,ang;
+  if(n.side==='r'){ from=[n.x+n.w, n.hy]; to=[hub.x, n.hy]; ang=0; }
+  else if(n.side==='l'){ from=[hub.x+hub.w, n.hy]; to=[n.x, n.hy]; ang=0; }
+  else { from=[hub.x+hub.w/2, hub.y+hub.h]; to=[n.x+n.w/2, n.y]; ang=Math.PI/2; }
+  glow.appendChild(rc.line(from[0],from[1],to[0],to[1],lineOpt));
+  svg.appendChild(arrowHead(to[0],to[1],ang,STROKE));
+  svg.appendChild(arrowHead(from[0],from[1],ang+Math.PI,STROKE));
+});
+</script>
+</body>
+</html>

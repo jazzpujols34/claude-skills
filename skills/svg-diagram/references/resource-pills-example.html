@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagram style compare — clean vs rough.js hybrid</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0B0F; --panel:#15151B; --stroke:#C9D2D9; --text:#E8EDF0; --text2:#9aa3ab; --border:#2a2b33;
+}
+body.light{
+  --bg:#FAFAF8; --panel:#FFFFFF; --stroke:#52514C; --text:#1A1A18; --text2:#6b6a64; --border:#E3E1DA;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:background .2s}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 28px 80px}
+.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+h1{font-size:22px;font-weight:900;letter-spacing:-.01em}
+.sub{color:var(--text2);font-size:14px;max-width:760px;margin-bottom:20px}
+.toggle{margin-left:auto;display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:13px;font-weight:700;color:var(--text);font-family:'JetBrains Mono',monospace}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:22px}
+.panel h2{font-size:15px;font-weight:800;letter-spacing:.02em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.panel .tag{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:999px;background:#16A34A;color:#fff}
+.panel .tag.b{background:#2563EB}
+.panel .desc{color:var(--text2);font-size:13px;margin-bottom:8px}
+.panel svg{width:100%;height:auto;display:block}
+.verdict{font-size:12.5px;color:var(--text2);margin-top:6px;border-top:1px solid var(--border);padding-top:10px;line-height:1.7}
+.verdict b{color:var(--text)}
+.legend{display:flex;gap:8px 16px;flex-wrap:wrap;font-size:12px;color:var(--text2);margin:2px 0 14px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:13px;border-radius:4px;display:inline-block}
+svg text{font-family:system-ui,-apple-system,sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>Diagram style: one diagram, two ways to draw it</h1>
+    <button class="toggle" id="tg">◐ Toggle light / dark</button>
+  </div>
+  <p class="sub">The same hub-and-spoke concept diagram (an LLM-inference memory footprint), rendered two ways. Watch: ① how the colour-coded resource pills read, ② whether the hand-drawn style still holds up in the <strong>light theme</strong>. Use the toggle, top right.</p>
+
+  <div class="legend">
+    <span><i style="background:#16A34A"></i>HBM / on-GPU memory</span>
+    <span><i style="background:#0D9488"></i>DRAM main memory</span>
+    <span><i style="background:#DC2626"></i>SSD · NAND storage</span>
+    <span><i style="background:#2563EB"></i>CPU</span>
+    <span><i style="background:#D97706"></i>DPU data movement</span>
+  </div>
+
+  <div class="panel">
+    <h2><span class="tag">Option 1</span> Clean: geometric strokes + resource pills</h2>
+    <p class="desc">Clean geometric strokes, hub-and-spoke, whitespace, bidirectional arrows, a colour-coded pill under each box. Holds in both themes, zero dependencies.</p>
+    <svg id="svgClean" viewBox="0 0 920 560" role="img" aria-label="Clean hub-and-spoke diagram of an inference memory footprint"></svg>
+    <p class="verdict"><b>Pros:</b> clear in light and dark, no dependencies, single file, works for data-dense diagrams too. <b>This is the recommended default.</b></p>
+  </div>
+
+  <div class="panel">
+    <h2><span class="tag b">Option 2</span> rough.js hybrid: hand-drawn outlines + clean text</h2>
+    <p class="desc">rough.js draws hand-drawn boxes and lines (dark-first); the text stays in a clean font. Toggle to light to see whether the "blackboard" feel survives.</p>
+    <svg id="svgRough" viewBox="0 0 920 560" role="img" aria-label="Hand-drawn hub-and-spoke diagram of an inference memory footprint"></svg>
+    <p class="verdict"><b>Cost:</b> needs rough.js (runtime JS generates the squiggly paths, which breaks the single-file-static rule), the charm drops sharply in light mode, and data-dense diagrams lose precision. <b>Best for: an English, conceptual, dark-first single diagram.</b></p>
+  </div>
+</div>
+
+<script src="https://unpkg.com/roughjs@4.6.6/bundled/rough.js"></script>
+<script>
+// ---- shared diagram model ----
+const PILL = { HBM:'#16A34A', LLM:'#16A34A', DRAM:'#0D9488', SSD:'#DC2626', CPU:'#2563EB', DPU:'#D97706' };
+const nodes = [
+  { id:'hub',     x:360, y:230, w:200, h:100, label:'One LLM inference', sub:'forward pass', pills:['LLM'] },
+  { id:'weights', x:70,  y:118, w:184, h:66,  label:'Model weights', sub:'loaded once',     pills:['HBM'] },
+  { id:'kv',      x:70,  y:372, w:184, h:66,  label:'KV cache',      sub:'grows with context', pills:['HBM','DRAM','SSD'] },
+  { id:'cpu',     x:666, y:118, w:184, h:66,  label:'CPU work',      sub:'agentic spikes',  pills:['CPU','DRAM'] },
+  { id:'store',   x:666, y:372, w:184, h:66,  label:'Storage offload', sub:'SSD pool',      pills:['SSD','DPU'] },
+  { id:'tier',    x:368, y:470, w:184, h:66,  label:'Memory tiers',  sub:'G1→G4',           pills:['HBM','DRAM','SSD'] },
+];
+const N = Object.fromEntries(nodes.map(n=>[n.id,n]));
+// edges: [from,to, fromSide, toSide]
+const edges = [
+  ['weights','hub','r','l'], ['kv','hub','r','l'],
+  ['cpu','hub','l','r'], ['store','hub','l','r'],
+  ['hub','tier','b','t'],
+];
+function sidePt(n, side){
+  if(side==='l') return [n.x, n.y+n.h/2];
+  if(side==='r') return [n.x+n.w, n.y+n.h/2];
+  if(side==='t') return [n.x+n.w/2, n.y];
+  return [n.x+n.w/2, n.y+n.h]; // b
+}
+function svgEl(t,a){ const e=document.createElementNS('http://www.w3.org/2000/svg',t); for(const k in a) e.setAttribute(k,a[k]); return e; }
+function arrowHead(x,y,ang,color){ // filled triangle, tip at (x,y), pointing along ang
+  const L=9,W=4.6;
+  const bx=x-L*Math.cos(ang), by=y-L*Math.sin(ang);
+  const p1=[bx - W*Math.sin(ang), by + W*Math.cos(ang)];
+  const p2=[bx + W*Math.sin(ang), by - W*Math.cos(ang)];
+  return svgEl('path',{d:`M${x},${y} L${p1[0].toFixed(1)},${p1[1].toFixed(1)} L${p2[0].toFixed(1)},${p2[1].toFixed(1)} Z`, fill:color});
+}
+function pillsRow(cx, topY, pills){ // returns array of els centered at cx
+  const els=[]; const pw=46, ph=19, gap=7;
+  const total = pills.length*pw + (pills.length-1)*gap;
+  let x = cx - total/2;
+  pills.forEach(p=>{
+    els.push(svgEl('rect',{x:x, y:topY, width:pw, height:ph, rx:6, fill:PILL[p]}));
+    const t=svgEl('text',{x:x+pw/2, y:topY+ph/2+4, 'text-anchor':'middle', 'font-size':'10.5', 'font-weight':'700', fill:'#fff'}); t.textContent=p; els.push(t);
+    x += pw+gap;
+  });
+  return els;
+}
+function theme(){ return document.body.classList.contains('light')
+  ? {stroke:'#52514C', text:'#1A1A18', sub:'#6b6a64'}
+  : {stroke:'#C9D2D9', text:'#E8EDF0', sub:'#9aa3ab'}; }
+
+function nodeText(n, th){
+  const els=[];
+  const t=svgEl('text',{x:n.x+n.w/2, y:n.y+n.h/2 - (n.sub?6:0)+4, 'text-anchor':'middle','font-size':'15','font-weight':'700', fill:th.text}); t.textContent=n.label; els.push(t);
+  if(n.sub){ const s=svgEl('text',{x:n.x+n.w/2, y:n.y+n.h/2+15, 'text-anchor':'middle','font-size':'11', fill:th.sub}); s.textContent=n.sub; els.push(s); }
+  return els;
+}
+
+function renderClean(){
+  const svg=document.getElementById('svgClean'); svg.innerHTML=''; const th=theme();
+  // edges
+  edges.forEach(([a,b,sa,sb])=>{
+    const [x1,y1]=sidePt(N[a],sa), [x2,y2]=sidePt(N[b],sb);
+    svg.appendChild(svgEl('line',{x1,y1,x2,y2, stroke:th.stroke, 'stroke-width':1.8, opacity:.8}));
+    const ang=Math.atan2(y2-y1,x2-x1);
+    svg.appendChild(arrowHead(x2,y2,ang,th.stroke));
+    svg.appendChild(arrowHead(x1,y1,ang+Math.PI,th.stroke));
+  });
+  // nodes
+  nodes.forEach(n=>{
+    svg.appendChild(svgEl('rect',{x:n.x,y:n.y,width:n.w,height:n.h,rx:14, fill:'none', stroke:th.stroke, 'stroke-width': n.id==='hub'?2.4:1.8}));
+    nodeText(n,th).forEach(e=>svg.appendChild(e));
+    pillsRow(n.x+n.w/2, n.y+n.h+10, n.pills).forEach(e=>svg.appendChild(e));
+  });
+}
+
+function renderRough(){
+  const svg=document.getElementById('svgRough'); svg.innerHTML=''; const th=theme();
+  const rc=rough.svg(svg);
+  edges.forEach(([a,b,sa,sb])=>{
+    const [x1,y1]=sidePt(N[a],sa), [x2,y2]=sidePt(N[b],sb);
+    svg.appendChild(rc.line(x1,y1,x2,y2,{stroke:th.stroke, roughness:1.6, bowing:2, strokeWidth:1.6}));
+    const ang=Math.atan2(y2-y1,x2-x1);
+    svg.appendChild(arrowHead(x2,y2,ang,th.stroke));
+    svg.appendChild(arrowHead(x1,y1,ang+Math.PI,th.stroke));
+  });
+  nodes.forEach(n=>{
+    svg.appendChild(rc.rectangle(n.x,n.y,n.w,n.h,{stroke:th.stroke, roughness:1.5, bowing:1.4, strokeWidth: n.id==='hub'?2.2:1.6, fill:'none'}));
+    nodeText(n,th).forEach(e=>svg.appendChild(e));
+    pillsRow(n.x+n.w/2, n.y+n.h+10, n.pills).forEach(e=>svg.appendChild(e));
+  });
+}
+
+function renderAll(){ renderClean(); if(window.rough) renderRough(); }
+document.getElementById('tg').addEventListener('click', ()=>{ document.body.classList.toggle('light'); renderAll(); });
+window.addEventListener('load', renderAll);
+renderAll();
+</script>
+</body>
+</html>

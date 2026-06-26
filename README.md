@@ -1,0 +1,59 @@
+# claude-skills
+
+A curated, growing collection of **self-contained skills for [Claude Code](https://claude.com/claude-code)** (and other AI coding agents). Each one was built and used while shipping real products, then stripped of anything personal so you can drop it into your own setup and it just works.
+
+> **Self-contained.** One skill = one folder under `skills/`. No cross-dependencies, no private paths, no setup. Copy the folder, start using it.
+
+## Install a skill
+
+Pick one from the catalog below and copy its folder into your Claude Code skills directory:
+
+```bash
+cp -r skills/svg-diagram ~/.claude/skills/
+```
+
+That's the whole install. Then just describe the task in your own words — each skill's `SKILL.md` lists the phrases it listens for. No build step; skills are Markdown plus optional scripts.
+
+## Catalog
+
+<!-- CATALOG:START -->
+| Skill | What it does | Tags | Maturity |
+|---|---|---|---|
+| [`svg-diagram`](skills/svg-diagram) | Draw SVG diagrams inside HTML pages — flowcharts, decision trees, layer diagrams, architecture flows, tier matrices. | `html`, `svg`, `diagrams`, `data-viz`, `dark-mode` | stable |
+<!-- CATALOG:END -->
+
+Maturity: `experimental` (new, may change) · `beta` (works, rough edges) · `stable` (battle-tested).
+
+## Why these are different
+
+- **Battle-tested, not theoretical.** Each skill earned its place fixing a real recurring problem across shipped projects — the `## Gotchas` in each one is the scar tissue.
+- **Generic by gate, not by promise.** Every skill must pass `tools/check-skill.sh` before it ships: an automated scan for hardcoded secrets and for personalization (author names, private domains, machine paths). Nothing reaches you pointing at files that only exist on someone else's laptop.
+- **Built for agents to read.** [`AGENTS.md`](AGENTS.md) and [`llms.txt`](llms.txt) describe the repo for AI tools; [`catalog.json`](catalog.json) is a machine-readable index, generated from the skills so it can't drift.
+
+## How it's organized
+
+```
+claude-skills/
+├── skills/<name>/        # each skill: SKILL.md + README.md + meta.json (+ scripts/refs)
+├── _template/            # the contract a new skill starts from
+├── tools/
+│   ├── check-skill.sh    # publish gate: secrets + personalization scan
+│   ├── new-skill.sh      # scaffold a new skill
+│   └── build-catalog.py  # regenerate catalog.json + the table above
+├── catalog.json          # generated index (don't hand-edit)
+├── AGENTS.md · llms.txt  # for AI agents
+└── CONTRIBUTING.md       # how to add a skill
+```
+
+## Add or contribute a skill
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). In short: `tools/new-skill.sh <name>`, write it, pass `tools/check-skill.sh`, run `tools/build-catalog.py`. The collection is meant to keep growing.
+
+## Related
+
+- **[post-to-visual](https://github.com/jazzpujols34/post-to-visual)** — a deeper standalone skill: turn an article into an illustrated, single-file HTML page.
+- **[claude-code-workflow](https://github.com/jazzpujols34/claude-code-workflow)** — the conventions/templates layer (CLAUDE.md, handover, memory) that makes context compound across sessions.
+
+## License
+
+[MIT](LICENSE). The skills are yours to adapt — review before redistributing verbatim.
