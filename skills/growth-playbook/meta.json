@@ -1,5 +1,13 @@
 {
-  "tags": ["growth", "marketing", "cro", "distribution", "post-launch", "email"],
+  "tags": [
+    "growth",
+    "marketing",
+    "cro",
+    "distribution",
+    "post-launch",
+    "email"
+  ],
+  "phase": "grow",
   "maturity": "stable",
   "version": "1.0.0",
   "requires": []

@@ -9,6 +9,7 @@
         "workflow",
         "process"
       ],
+      "phase": "build",
       "maturity": "stable",
       "version": "1.0.0",
       "path": "skills/debug-loop-breaker"
@@ -24,6 +25,7 @@
         "vercel",
         "pre-deploy"
       ],
+      "phase": "ship",
       "maturity": "stable",
       "version": "1.0.0",
       "path": "skills/deploy-checklist"
@@ -39,6 +41,7 @@
         "post-launch",
         "email"
       ],
+      "phase": "grow",
       "maturity": "stable",
       "version": "1.0.0",
       "path": "skills/growth-playbook"
@@ -54,6 +57,7 @@
         "owasp",
         "dependencies"
       ],
+      "phase": "ship",
       "maturity": "stable",
       "version": "1.0.0",
       "path": "skills/security-scanner"
@@ -69,6 +73,7 @@
         "web",
         "content"
       ],
+      "phase": "grow",
       "maturity": "stable",
       "version": "1.0.0",
       "path": "skills/seo-audit"
@@ -83,6 +88,7 @@
         "data-viz",
         "dark-mode"
       ],
+      "phase": "build",
       "maturity": "stable",
       "version": "1.0.0",
       "path": "skills/svg-diagram"
@@ -96,6 +102,7 @@
         "workflow",
         "quality"
       ],
+      "phase": "build",
       "maturity": "stable",
       "version": "1.0.0",
       "path": "skills/tdd-guard"

@@ -1,5 +1,13 @@
 {
-  "tags": ["seo", "schema", "meta-tags", "geo", "web", "content"],
+  "tags": [
+    "seo",
+    "schema",
+    "meta-tags",
+    "geo",
+    "web",
+    "content"
+  ],
+  "phase": "grow",
   "maturity": "stable",
   "version": "1.0.0",
   "requires": []

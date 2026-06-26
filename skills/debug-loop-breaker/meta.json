@@ -1,5 +1,10 @@
 {
-  "tags": ["debugging", "workflow", "process"],
+  "tags": [
+    "debugging",
+    "workflow",
+    "process"
+  ],
+  "phase": "build",
   "maturity": "stable",
   "version": "1.0.0",
   "requires": []

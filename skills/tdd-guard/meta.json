@@ -1,5 +1,11 @@
 {
-  "tags": ["testing", "tdd", "workflow", "quality"],
+  "tags": [
+    "testing",
+    "tdd",
+    "workflow",
+    "quality"
+  ],
+  "phase": "build",
   "maturity": "stable",
   "version": "1.0.0",
   "requires": []

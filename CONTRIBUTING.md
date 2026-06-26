@@ -16,8 +16,10 @@ Then fill in:
   `description` are required. The `description` is the routing signal: lead with the
   job, list trigger phrases, say what it's NOT for.
 - **`README.md`** — the human quickstart: what it does, how to install, one example.
-- **`meta.json`** — `tags`, `maturity` (`experimental` / `beta` / `stable`),
-  `version`, and any `requires` (e.g. a runtime or API key).
+- **`meta.json`** — `tags`, `phase` (`build` / `ship` / `grow` — which lifecycle
+  group it lands in on the README; leave empty to fall under "More"), `maturity`
+  (`experimental` / `beta` / `stable`), `version`, and any `requires` (e.g. a runtime
+  or API key).
 
 ## The publish gate (required)
 

@@ -55,10 +55,20 @@ def load_skill(d: Path) -> dict | None:
         "name": fm.get("name", d.name),
         "description": fm.get("description", "").strip(),
         "tags": meta.get("tags", []),
+        "phase": meta.get("phase", ""),
         "maturity": meta.get("maturity", "experimental"),
         "version": meta.get("version", "0.1.0"),
         "path": f"skills/{d.name}",
     }
+
+
+# Lifecycle phases, in order. A skill's meta.json `phase` slots it into one of these
+# groups in the README; anything unset (or unknown) lands under "More".
+PHASES = [
+    ("build", "Build", "Write, visualize, and debug your code."),
+    ("ship", "Ship", "Audit and deploy safely."),
+    ("grow", "Grow", "Get found, get users, keep them."),
+]
 
 
 def short(desc: str, limit: int = 160) -> str:
@@ -85,14 +95,26 @@ def main() -> int:
         json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
 
-    # Build the README table.
-    rows = ["| Skill | What it does | Tags | Maturity |", "|---|---|---|---|"]
-    for s in skills:
-        tags = ", ".join(f"`{t}`" for t in s["tags"]) or "—"
-        rows.append(
-            f"| [`{s['name']}`]({s['path']}) | {short(s['description'])} | {tags} | {s['maturity']} |"
-        )
-    table = "\n".join(rows)
+    # Build the README catalog, grouped by lifecycle phase.
+    def render_table(group: list) -> str:
+        out = ["| Skill | What it does | Tags | Maturity |", "|---|---|---|---|"]
+        for s in sorted(group, key=lambda x: x["name"]):
+            tags = ", ".join(f"`{t}`" for t in s["tags"]) or "—"
+            out.append(
+                f"| [`{s['name']}`]({s['path']}) | {short(s['description'])} | {tags} | {s['maturity']} |"
+            )
+        return "\n".join(out)
+
+    known = {key for key, _, _ in PHASES}
+    sections = []
+    for key, label, blurb in PHASES:
+        group = [s for s in skills if s["phase"] == key]
+        if group:
+            sections.append(f"### {label}\n_{blurb}_\n\n{render_table(group)}")
+    leftover = [s for s in skills if s["phase"] not in known]
+    if leftover:
+        sections.append(f"### More\n\n{render_table(leftover)}")
+    table = "\n\n".join(sections)
 
     readme = ROOT / "README.md"
     if readme.is_file():

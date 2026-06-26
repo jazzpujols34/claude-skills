@@ -1,5 +1,12 @@
 {
-  "tags": ["html", "svg", "diagrams", "data-viz", "dark-mode"],
+  "tags": [
+    "html",
+    "svg",
+    "diagrams",
+    "data-viz",
+    "dark-mode"
+  ],
+  "phase": "build",
   "maturity": "stable",
   "version": "1.0.0",
   "requires": []

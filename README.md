@@ -1,8 +1,10 @@
 # claude-skills
 
-A curated, growing collection of **self-contained skills for [Claude Code](https://claude.com/claude-code)** (and other AI coding agents). Each one was built and used while shipping real products, then stripped of anything personal so you can drop it into your own setup and it just works.
+**Skills for [Claude Code](https://claude.com/claude-code) (and other AI coding agents) that cover the whole arc of shipping a product — build, ship, grow.**
 
-> **Self-contained.** One skill = one folder under `skills/`. No cross-dependencies, no private paths, no setup. Copy the folder, start using it.
+Each one was pulled from real production work, then stripped of anything personal so you can drop it into your own setup and it just works. No theory, no boilerplate to adapt — copy a folder and tell your agent what you want.
+
+> **Self-contained.** One skill = one folder under `skills/`. No cross-dependencies, no private paths, no setup.
 
 ## Install a skill
 
@@ -16,16 +18,33 @@ That's the whole install. Then just describe the task in your own words — each
 
 ## Catalog
 
+Grouped by where they help — from your first commit to your first customers.
+
 <!-- CATALOG:START -->
+### Build
+_Write, visualize, and debug your code._
+
 | Skill | What it does | Tags | Maturity |
 |---|---|---|---|
 | [`debug-loop-breaker`](skills/debug-loop-breaker) | Use when debugging has gone in circles — same error 2+ times, repeated failed fixes. | `debugging`, `workflow`, `process` | stable |
-| [`deploy-checklist`](skills/deploy-checklist) | Use before deploying any project to production. | `deploy`, `ci-cd`, `cloudflare`, `cloud-run`, `vercel`, `pre-deploy` | stable |
-| [`growth-playbook`](skills/growth-playbook) | Post-launch marketing and growth. | `growth`, `marketing`, `cro`, `distribution`, `post-launch`, `email` | stable |
-| [`security-scanner`](skills/security-scanner) | Use before any production deploy or when asked to audit security. | `security`, `secrets`, `audit`, `pre-deploy`, `owasp`, `dependencies` | stable |
-| [`seo-audit`](skills/seo-audit) | SEO audit and optimization for web projects. | `seo`, `schema`, `meta-tags`, `geo`, `web`, `content` | stable |
 | [`svg-diagram`](skills/svg-diagram) | Draw SVG diagrams inside HTML pages — flowcharts, decision trees, layer diagrams, architecture flows, tier matrices. | `html`, `svg`, `diagrams`, `data-viz`, `dark-mode` | stable |
 | [`tdd-guard`](skills/tdd-guard) | Enforce test-first development. | `testing`, `tdd`, `workflow`, `quality` | stable |
+
+### Ship
+_Audit and deploy safely._
+
+| Skill | What it does | Tags | Maturity |
+|---|---|---|---|
+| [`deploy-checklist`](skills/deploy-checklist) | Use before deploying any project to production. | `deploy`, `ci-cd`, `cloudflare`, `cloud-run`, `vercel`, `pre-deploy` | stable |
+| [`security-scanner`](skills/security-scanner) | Use before any production deploy or when asked to audit security. | `security`, `secrets`, `audit`, `pre-deploy`, `owasp`, `dependencies` | stable |
+
+### Grow
+_Get found, get users, keep them._
+
+| Skill | What it does | Tags | Maturity |
+|---|---|---|---|
+| [`growth-playbook`](skills/growth-playbook) | Post-launch marketing and growth. | `growth`, `marketing`, `cro`, `distribution`, `post-launch`, `email` | stable |
+| [`seo-audit`](skills/seo-audit) | SEO audit and optimization for web projects. | `seo`, `schema`, `meta-tags`, `geo`, `web`, `content` | stable |
 <!-- CATALOG:END -->
 
 Maturity: `experimental` (new, may change) · `beta` (works, rough edges) · `stable` (battle-tested).
