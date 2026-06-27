@@ -1,5 +1,7 @@
 # claude-skills
 
+![claude-skills — curated, drop-in skills for Claude Code](docs/cover.jpg)
+
 **Skills for [Claude Code](https://claude.com/claude-code) (and other AI coding agents) that cover the whole arc of shipping a product — build, ship, grow.**
 
 Each one was pulled from real production work, then stripped of anything personal so you can drop it into your own setup and it just works. No theory, no boilerplate to adapt — copy a folder and tell your agent what you want.
