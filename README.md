@@ -8,6 +8,8 @@ Each one was pulled from real production work, then stripped of anything persona
 
 > **Self-contained.** One skill = one folder under `skills/`. No cross-dependencies, no private paths, no setup.
 
+> **Last verified against Claude Code: 2026-06-27.** See [`CHANGELOG.md`](CHANGELOG.md) for what's changed.
+
 ## Install a skill
 
 Pick one from the catalog below and copy its folder into your Claude Code skills directory:
@@ -77,6 +79,14 @@ claude-skills/
 ## Add or contribute a skill
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md). In short: `tools/new-skill.sh <name>`, write it, pass `tools/check-skill.sh`, run `tools/build-catalog.py`. The collection is meant to keep growing.
+
+## Maintenance
+
+This isn't a content feed — it grows when there's something genuinely worth adding, and stays correct in between:
+
+- **New skills land organically.** When a skill proves itself across real projects, it goes through the pipeline above. Quality bar over count.
+- **Re-verified against Claude Code monthly.** Claude Code moves fast, so the skills and their scripts are re-checked against the current release and the "Last verified" date at the top is bumped.
+- **Gotchas come from use.** Each skill's `## Gotchas` grows as real edge cases surface.
 
 ## Related
 
