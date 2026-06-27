@@ -19,9 +19,20 @@ in their `meta.json`; this log tracks the repo.
   history leaks, dependency vulns, and OWASP issues (ships 3 standalone scripts).
 - **deploy-checklist** — auto-detects the platform (Cloudflare Pages / Cloud Run /
   Vercel) and runs platform-specific pre-deploy checks (ships 4 standalone scripts).
-- **tdd-guard** — enforces test-first development; pairs with debug-loop-breaker
-  (prevention vs. cure).
+- **tdd-discipline** — enforces test-first development; pairs with debug-loop-breaker
+  (prevention vs. cure). Renamed from `tdd-guard` to avoid clashing with the project
+  it adapts.
 - **growth-playbook** — the after-you-ship skill: positioning, landing-page audit,
   CRO, distribution, email sequences, churn prevention.
 - **seo-audit** — technical SEO + content audit + schema markup + GEO (optimizing
   for AI search).
+- **teaching-mode** — makes the agent teach incrementally and verify real
+  understanding during coding sessions, not just hand over working code.
+- **annotate** — adds a click-to-comment layer to any HTML artifact; inline notes
+  copy back as a ready-to-paste prompt. Independent reimplementation inspired by
+  Kun Chen's Lavish.
+
+### Attribution
+- **growth-playbook** adapted from [marketingskills](https://github.com/coreyhaines31/marketingskills) (Corey Haines),
+  **seo-audit** from [claude-seo](https://github.com/AgriciDaniel/claude-seo) (Daniel Agrici),
+  **tdd-discipline** from [tdd-guard](https://github.com/nizos/tdd-guard) (nizos). Each credits its source in-skill.

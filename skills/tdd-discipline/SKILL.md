@@ -1,9 +1,11 @@
 ---
-name: tdd-guard
+name: tdd-discipline
 description: Enforce test-first development. Trigger on "write a feature", "add functionality", "implement", or any code task that touches business logic. Auto-activate when writing code without tests. Pairs with debug-loop-breaker (prevention vs cure).
 ---
 
-# TDD Guard
+# TDD Discipline
+
+> Adapted from [tdd-guard](https://github.com/nizos/tdd-guard) by nizos; renamed to avoid clashing with that project (see README Credits).
 
 > No production code without a failing test first. This is the prevention layer — debug-loop-breaker is the cure.
 

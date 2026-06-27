@@ -5,6 +5,8 @@ description: Post-launch marketing and growth. Trigger on "get customers", "how 
 
 # Growth Playbook
 
+> Adapted from [marketingskills](https://github.com/coreyhaines31/marketingskills) by Corey Haines (see README Credits).
+
 > You shipped it. Now sell it. This skill covers everything between "it's live" and "first paying customer."
 
 ## Detection — When to Activate

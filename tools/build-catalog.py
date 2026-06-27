@@ -65,7 +65,7 @@ def load_skill(d: Path) -> dict | None:
 # Lifecycle phases, in order. A skill's meta.json `phase` slots it into one of these
 # groups in the README; anything unset (or unknown) lands under "More".
 PHASES = [
-    ("build", "Build", "Write, visualize, and debug your code."),
+    ("build", "Build", "Write, visualize, test, debug, review, and learn as you build."),
     ("ship", "Ship", "Audit and deploy safely."),
     ("grow", "Grow", "Get found, get users, keep them."),
 ]

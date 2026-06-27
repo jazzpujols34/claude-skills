@@ -1,0 +1,12 @@
+{
+  "tags": [
+    "teaching",
+    "learning",
+    "education",
+    "understanding"
+  ],
+  "phase": "build",
+  "maturity": "stable",
+  "version": "1.0.0",
+  "requires": []
+}

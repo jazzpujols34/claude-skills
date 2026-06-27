@@ -1,4 +1,4 @@
-# tdd-guard
+# tdd-discipline
 
 > Keep an AI coding agent on the test-first path: a failing test before any production code, every time.
 
@@ -6,10 +6,14 @@
 
 **Install.** Copy the folder into your Claude Code skills directory:
 ```bash
-cp -r skills/tdd-guard ~/.claude/skills/
+cp -r skills/tdd-discipline ~/.claude/skills/
 ```
 Then trigger it by describing a code task in your own words — "write a feature", "add functionality", "implement X", "fix this bug". The skill listens for those (see the `description` in [`SKILL.md`](SKILL.md)).
 
 **Example.** Ask "add a function that parses a date range" → the agent first writes a failing `test_parse_range` with exact inputs/outputs and one edge case, runs it to confirm RED, writes just enough code to go GREEN, then runs the whole suite before touching anything else.
 
 **Dependencies.** None. The protocol is editor-agnostic and works with whatever test runner your project already uses (examples use Vitest and pytest). An optional hard-enforcement upgrade path (the `nizos/tdd-guard` Claude Code plugin) is described at the end of `SKILL.md`.
+
+## Credits
+
+The test-first protocol here is adapted from [tdd-guard](https://github.com/nizos/tdd-guard) by nizos — the original `tdd-guard`, which provides hook-based hard enforcement. This skill is a lighter, editor-agnostic behavioral guide, **renamed from `tdd-guard`** to avoid clashing with it.

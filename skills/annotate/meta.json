@@ -1,0 +1,14 @@
+{
+  "tags": [
+    "html",
+    "review",
+    "annotation",
+    "feedback"
+  ],
+  "phase": "build",
+  "maturity": "stable",
+  "version": "1.0.0",
+  "requires": [
+    "python3"
+  ]
+}

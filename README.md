@@ -24,13 +24,15 @@ Grouped by where they help — from your first commit to your first customers.
 
 <!-- CATALOG:START -->
 ### Build
-_Write, visualize, and debug your code._
+_Write, visualize, test, debug, review, and learn as you build._
 
 | Skill | What it does | Tags | Maturity |
 |---|---|---|---|
+| [`annotate`](skills/annotate) | Add an inline-annotation layer to any HTML artifact so you can click/select parts of a plan, spec, review, or report and leave notes that copy back as a ready-t… | `html`, `review`, `annotation`, `feedback` | stable |
 | [`debug-loop-breaker`](skills/debug-loop-breaker) | Use when debugging has gone in circles — same error 2+ times, repeated failed fixes. | `debugging`, `workflow`, `process` | stable |
 | [`svg-diagram`](skills/svg-diagram) | Draw SVG diagrams inside HTML pages — flowcharts, decision trees, layer diagrams, architecture flows, tier matrices. | `html`, `svg`, `diagrams`, `data-viz`, `dark-mode` | stable |
-| [`tdd-guard`](skills/tdd-guard) | Enforce test-first development. | `testing`, `tdd`, `workflow`, `quality` | stable |
+| [`tdd-discipline`](skills/tdd-discipline) | Enforce test-first development. | `testing`, `tdd`, `workflow`, `quality` | stable |
+| [`teaching-mode`](skills/teaching-mode) | Operating mode for coding sessions where the user wants to understand the work, not just receive it. | `teaching`, `learning`, `education`, `understanding` | stable |
 
 ### Ship
 _Audit and deploy safely._

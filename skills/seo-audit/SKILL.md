@@ -5,6 +5,8 @@ description: SEO audit and optimization for web projects. Trigger on "SEO", "sea
 
 # SEO Audit
 
+> Adapted from [claude-seo](https://github.com/AgriciDaniel/claude-seo) by Daniel Agrici (see README Credits).
+
 > Full-site SEO analysis with actionable fixes. From meta tags to structured data to content strategy and AI-search (GEO).
 
 ## When to Use

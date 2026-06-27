@@ -1,6 +1,20 @@
 {
-  "count": 7,
+  "count": 9,
   "skills": [
+    {
+      "name": "annotate",
+      "description": "Add an inline-annotation layer to any HTML artifact so you can click/select parts of a plan, spec, review, or report and leave notes that copy back as a ready-to-paste prompt. The INPUT half of HTML-output workflows — pairs with HTML-producing skills like post-to-visual and svg-diagram. Use when producing a plan/spec/review/report HTML that someone will critique, or when asked to \"annotate\", \"leave notes on\", \"review-in-place\", or \"make this commentable\". Inspired by Kun Chen's Lavish, minus the server/telemetry/dependency.",
+      "tags": [
+        "html",
+        "review",
+        "annotation",
+        "feedback"
+      ],
+      "phase": "build",
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/annotate"
+    },
     {
       "name": "debug-loop-breaker",
       "description": "Use when debugging has gone in circles — same error 2+ times, repeated failed fixes. Auto-trigger on \"still not working\", \"same error\", \"try again\" appearing twice in a session. Stops guessing, forces systematic diagnosis.",
@@ -94,7 +108,7 @@
       "path": "skills/svg-diagram"
     },
     {
-      "name": "tdd-guard",
+      "name": "tdd-discipline",
       "description": "Enforce test-first development. Trigger on \"write a feature\", \"add functionality\", \"implement\", or any code task that touches business logic. Auto-activate when writing code without tests. Pairs with debug-loop-breaker (prevention vs cure).",
       "tags": [
         "testing",
@@ -105,7 +119,21 @@
       "phase": "build",
       "maturity": "stable",
       "version": "1.0.0",
-      "path": "skills/tdd-guard"
+      "path": "skills/tdd-discipline"
+    },
+    {
+      "name": "teaching-mode",
+      "description": "Operating mode for coding sessions where the user wants to understand the work, not just receive it. Invoke on \"teach me this\", \"explain what we built\", \"make sure I get this\", \"walk me through the change\", or when the user is learning new tech / unfamiliar code. Opt out with \"just ship it\", \"skip teaching\", or \"no quiz\".",
+      "tags": [
+        "teaching",
+        "learning",
+        "education",
+        "understanding"
+      ],
+      "phase": "build",
+      "maturity": "stable",
+      "version": "1.0.0",
+      "path": "skills/teaching-mode"
     }
   ]
 }

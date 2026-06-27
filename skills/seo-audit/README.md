@@ -11,3 +11,7 @@ cp -r skills/seo-audit ~/.claude/skills/
 Then trigger it by describing the task in your own words — "audit my site's SEO", "add schema markup", "why isn't my site ranking", "optimize for AI search". The skill listens for those phrases (see the `description` in [`SKILL.md`](SKILL.md)).
 
 **Dependencies.** None. The checks use `curl` (and optionally `npx lighthouse`); no API key required.
+
+## Credits
+
+Adapted from [claude-seo](https://github.com/AgriciDaniel/claude-seo) by Daniel Agrici — a condensed single-skill version of that project's approach. See the original for its full multi-subskill system.
